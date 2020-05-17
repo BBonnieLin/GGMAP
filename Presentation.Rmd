@@ -1,0 +1,106 @@
+---
+title: "Presentation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Step1
+install and load packages
+```{r}
+#install.packages("ggmap")
+#install.packages("mapproj")
+#install.packages("ggplot2")
+
+library("ggmap")
+library("mapproj")
+library("ggplot2")
+```
+
+### Step2
+resigster ggmap
+```{r}
+register_google(key = "AIzaSyAhx57TxNBEGoEI6ECGswNEGe25wRNVFpM")
+```
+
+### Step3
+use get_map to draw the map
+location可填地名，若要精準也可用經緯度
+```{r}
+#map <- get_map(location = 'Taiwan', zoom = 7)
+#ggmap(map)
+```
+```{r}
+map <- get_map(location=c(lon=120.217434, lat=22.997919), zoom=10)
+ggmap(map)
+```
+
+#### zoom
+zoom可放大或縮小圖片
+```{r}
+map <- get_map(location = 'Taiwan', zoom = 7)
+ggmap(map)
+```
+```{r}
+map <- get_map(location = 'Taiwan', zoom = 5)
+ggmap(map)
+```
+```{r}
+map <- get_map(location = 'Taiwan', zoom = 9)
+ggmap(map)
+```
+
+#### language
+language可調整地圖的語言，只要是google maps上的語言皆可
+```{r}
+map <- get_map(location='Taiwan', zoom=7, language="zh-TW") #Chinese
+ggmap(map)
+```
+```{r}
+map <- get_map(location='Taiwan', zoom=7, language="en-EN") #English
+ggmap(map)
+```
+
+#### maptype
+maptype可調整地圖的類型，共16種
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10, maptype="terrain")
+ggmap(map) #地形圖(預設)
+```
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10, maptype="roadmap")
+ggmap(map) #道路圖
+```
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10, maptype="satellite")
+ggmap(map) #衛星圖
+```
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10, maptype="hybrid")
+ggmap(map) #混合圖(roadmap + satellite)
+```
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10, maptype="toner-lite")
+ggmap(map) #黑白主道路圖
+```
+
+#### color
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10, color="color") #color
+ggmap(map)
+```
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10, color="bw") #black and white
+ggmap(map)
+```
+
+####darken
+```{r}
+map <- get_map(location = c(lon=120.217434, lat=22.997919), zoom= 10)
+
+ggmap(map, darken=0.5) #darker
+ggmap(map, darken=c(0.5, "white")) #lighter
+```
